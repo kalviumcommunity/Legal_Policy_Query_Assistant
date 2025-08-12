@@ -1,0 +1,27 @@
+{
+  "name": "legal_policy_query_assistant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalviumcommunity/Legal_Policy_Query_Assistant.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kalviumcommunity/Legal_Policy_Query_Assistant/issues"
+  },
+  "homepage": "https://github.com/kalviumcommunity/Legal_Policy_Query_Assistant#readme"
+}
