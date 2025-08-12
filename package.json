@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"No tests yet\" && exit 0"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,11 @@
   "bugs": {
     "url": "https://github.com/kalviumcommunity/Legal_Policy_Query_Assistant/issues"
   },
-  "homepage": "https://github.com/kalviumcommunity/Legal_Policy_Query_Assistant#readme"
+  "homepage": "https://github.com/kalviumcommunity/Legal_Policy_Query_Assistant#readme",
+  "dependencies": {
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "jest": "^30.0.5"
+  }
 }
