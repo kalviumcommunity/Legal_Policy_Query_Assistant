@@ -8,7 +8,7 @@ const { countTokens } = require('./tokenizer');
  * @returns {Array<{chunkId: number, text: string, tokenCount: number}>}
  */
 function splitIntoChunks(text, tokenLimit = 200) {
-  const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+  const sentences = text.split(/(?<=[.!?])\s+/).filter(s => s.trim());
   const chunks = [];
   let currentChunk = '';
   let chunkId = 1;
