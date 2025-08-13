@@ -1,17 +1,17 @@
 // utils/tokenizer.js
 
 /**
- * Approximate token counter
- * This is a fallback — not 100% accurate to GPT tokenization,
- * but works for chunk size control without API calls.
- * 
- * @param {string} text
- * @returns {number} estimated token count
+ * Tokenize on whitespace (simple, fast approximation).
+ * You can swap this with a tiktoken-based tokenizer later.
  */
-function countTokens(text) {
-  // Simple approximation: split on whitespace & punctuation
-  if (!text || typeof text !== 'string') return 0;
-  return text.trim().split(/\s+/).filter(s => s).length;
+function tokenize(text) {
+  if (!text || typeof text !== 'string') return [];
+  return text.trim().split(/\s+/).filter(Boolean);
 }
 
-module.exports = { countTokens };
+/** Count tokens using the tokenizer above. */
+function countTokens(text) {
+  return tokenize(text).length;
+}
+
+module.exports = { tokenize, countTokens };
