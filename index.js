@@ -49,7 +49,7 @@ else if (command === 'chunk') {
   const text = fs.readFileSync(absPath, 'utf8');
   const chunks = splitIntoChunks(text, 200); // token limit example
 
-  const outDir = path.resolve('./data/chunks');
+  const outDir = path.join(__dirname, 'data', 'chunks');
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
   chunks.forEach((chunk, index) => {
