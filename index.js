@@ -40,7 +40,7 @@ async function main() {
     const model = new ChatGoogleGenerativeAI({
       model: "gemini-1.5-flash",
       apiKey: process.env.GEMINI_API_KEY,
-      temperature: 0.9 // more factual
+      temperature: 0.9 
     }).bindTools(tools);
 
     // Combine system prompt, context, and user question
@@ -53,7 +53,24 @@ async function main() {
     const response = await model.invoke(input);
 
     console.log(chalk.yellow("\nAnswer:"));
-    console.log(response.content);
+    console.log("Response:",response.content);
+
+    // log token usage
+    const genAI = new GoogleGenAI(process.env.GEMINI_API_KEY);
+
+    const rawResponse = await genAI.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: [
+        {
+          role: "user",
+          parts: [{ text: `Question: ${question}\n\nContext:\n${context}` }]
+        }
+      ],
+      systemInstruction: SYSTEM_PROMPT
+    });
+    console.log(chalk.gray("\nToken usage:"));
+    console.log(rawResponse.usageMetadata.totalTokenCount);
+
     console.log(chalk.gray("\n---\n"));
   }
   const { matches } = await store.query({

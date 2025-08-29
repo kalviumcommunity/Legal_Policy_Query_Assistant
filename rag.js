@@ -37,7 +37,7 @@ export async function buildVectorStore(docs) {
 export async function queryVectorStore(store, query, path) {
   const vector = await embeddings.embedQuery(query);
   return await store.query({
-    topK: 100,
+    topK: 40,
     vector,
     filter: { source: path },
     includeMetadata: true
