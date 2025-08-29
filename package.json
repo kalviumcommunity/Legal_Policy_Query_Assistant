@@ -1,0 +1,35 @@
+{
+  "name": "legal_policy_query_assistant",
+  "version": "1.0.0",
+  "description": "A CLI tool for querying legal and policy documents using AI.",
+  "homepage": "https://github.com/kalviumcommunity/Legal_Policy_Query_Assistant#readme",
+  "bugs": {
+    "url": "https://github.com/kalviumcommunity/Legal_Policy_Query_Assistant/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalviumcommunity/Legal_Policy_Query_Assistant.git"
+  },
+  "license": "ISC",
+  "author": "Fazil",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@google/genai": "^1.15.0",
+    "@langchain/community": "^0.3.53",
+    "@langchain/core": "^0.3.72",
+    "@langchain/google-genai": "^0.2.16",
+    "@langchain/pinecone": "^0.2.0",
+    "@langchain/textsplitters": "^0.1.0",
+    "@pinecone-database/pinecone": "^6.1.2",
+    "chalk": "^5.6.0",
+    "dotenv": "^17.2.1",
+    "faiss": "^1.0.0",
+    "inquirer": "^12.9.4",
+    "langchain": "^0.3.31",
+    "pdf-parse": "^1.1.1"
+  }
+}
