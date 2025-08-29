@@ -10,12 +10,14 @@ import { buildVectorStore, queryVectorStore } from "./rag.js";
 
 async function main() {
   console.log(chalk.green("🧑‍⚖️ Legal Policy Query Assistant\n"));
+  const path = "./docs/sample_legal_policy.pdf";
 
-  // Load document (sample: hostel_rules.pdf)
-  const docs = await loadDocument("./docs/hostel_rules.pdf");
-  
+  // Load document
+  const docs = await loadDocument(path);
+
   // Build RAG index
   const store = await buildVectorStore(docs[0]);
+
   // CLI prompt loop
   while (true) {
     const { question } = await inquirer.prompt([
@@ -29,15 +31,15 @@ async function main() {
     if (question.toLowerCase() === "exit") break;
 
     // Retrieve context
-    const relevant = await queryVectorStore(store, question);
+    const relevant = await queryVectorStore(store, question, path);
 
-    const context = relevant.map((r) => r.pageContent).join("\n");
+    const context = relevant.matches.map((m) => m.metadata.text).join("\n");
 
     // Call Gemini API
     const model = new ChatGoogleGenerativeAI({
       model: "gemini-1.5-flash",
       apiKey: process.env.GEMINI_API_KEY,
-      temperature: 0.2 // more factual
+      temperature: 0.9 // more factual
     });
 
     // Combine system prompt, context, and user question
@@ -52,6 +54,19 @@ async function main() {
     console.log(chalk.yellow("\nAnswer:"));
     console.log(response.content);
     console.log(chalk.gray("\n---\n"));
+  }
+  const { matches } = await store.query({
+    topK: 10000,
+    vector: Array(768).fill(0),
+    filter: { source: path },
+    includeMetadata: true
+    // namespace: "pdfs"
+  });
+  const matchedIds = matches.map((match) => match.id);
+
+  if (matchedIds.length) {
+    await store.deleteMany(matchedIds);
+    console.log("Pinecone data deleted.");
   }
 }
 
