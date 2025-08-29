@@ -7,6 +7,7 @@ import { SYSTEM_PROMPT } from "./prompts.js";
 import { loadDocument } from "./utils/fileLoader.js";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { buildVectorStore, queryVectorStore } from "./rag.js";
+import tools from "./tools.js";
 
 async function main() {
   console.log(chalk.green("🧑‍⚖️ Legal Policy Query Assistant\n"));
@@ -40,7 +41,7 @@ async function main() {
       model: "gemini-1.5-flash",
       apiKey: process.env.GEMINI_API_KEY,
       temperature: 0.9 // more factual
-    });
+    }).bindTools(tools);
 
     // Combine system prompt, context, and user question
     const input = [

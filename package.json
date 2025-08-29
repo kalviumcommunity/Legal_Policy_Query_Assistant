@@ -31,6 +31,7 @@
     "faiss": "^1.0.0",
     "inquirer": "^12.9.4",
     "langchain": "^0.3.31",
-    "pdf-parse": "^1.1.1"
+    "pdf-parse": "^1.1.1",
+    "zod": "^4.1.5"
   }
 }
